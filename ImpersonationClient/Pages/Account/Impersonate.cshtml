@@ -1,0 +1,29 @@
+﻿@page "/account/impersonate"
+@model ImpersonationClient.Pages.Account.ImpersonateModel
+
+@{
+    ViewData["Title"] = "Impersonate User | WorldatWork";
+}
+
+
+<div class="container">
+    <div class="row" style="margin-top: 65px">
+        <div class="col-lg-4">
+            <h2 style="margin-top: 15px">Login as another user</h2>
+            <h6>This will let you login as the customer whose email you submit and perform actions on behalf of the customer.</h6>
+            <form method="post" style="margin-top: 15px">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <input type="email" asp-for="@Model.Email" class="form-control" id="" aria-describedby="emailHelp" placeholder="User email">
+                </div>
+                <button type="submit" class="btn btn-primary">Impersonate</button>
+                <div>
+                    @if (!Model.ModelState.IsValid)
+                    {
+                        <div style="margin-top: 20px;font-size: 14px;padding: 10px;" class="alert-danger">@Html.ValidationMessage("customError")</div>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

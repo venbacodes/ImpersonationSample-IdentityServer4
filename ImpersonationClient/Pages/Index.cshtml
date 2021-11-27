@@ -1,0 +1,27 @@
+﻿@page
+@model IndexModel
+@using ImpersonationClient
+
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@if (User.Identity.IsAuthenticated && User.IsImpersonating())
+{
+    var adminUserEmail = User.GetClaim<string>("ImpersonationAdminEmail");
+    <div>
+        <h2 style="color:red">Impersonate Mode</h2>
+        <br />
+        <b>Admin:</b> @adminUserEmail
+        <br />
+        <b>Logged-in as:</b> @User.Identity.Name
+        <br />
+        Any action you perform will be recorded as the "logged-in as" user.
+
+    </div>
+}
